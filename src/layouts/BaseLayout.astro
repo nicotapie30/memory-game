@@ -1,4 +1,7 @@
 ---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Fonts from "@/assets/fonts/Fonts.astro";
 const { title, description } = Astro.props;
 ---
 
@@ -11,10 +14,22 @@ const { title, description } = Astro.props;
     <meta name={description}>
     <meta name="author" content="Nicolás Alejandro Tapié">
     <meta name="robots" content="index, follow">
+    <Fonts />
     <title>{title}</title>
 </head>
 <body>
+    <Header />
 
-    
+    <h1 class="title__title">Memory</h1>
+
+    <slot />
+
+    <Footer />
 </body>
 </html>
+
+<style>
+.title__title {
+    font-family: 'Exo 2';
+}
+</style>

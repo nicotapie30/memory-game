@@ -1,0 +1,56 @@
+---
+import Github from "@/assets/icons/Github.astro";
+import Instagram from "@/assets/icons/Instagram.astro";
+import Linkedin from "@/assets/icons/Linkedin.astro";
+import Facebook from "@/assets/icons/Facebook.astro";
+import Gmail from "@/assets/icons/Gmail.astro";
+---
+
+<footer class="footer">
+    <div class="footer__container footer__container-brands">
+        <div class="brands__container-contents brands__container-contents-img">
+            <img class="footer__img" src="src/assets/Logo-Nico.webp" alt="Logo Nicolás" title="">
+        </div>
+        <div class="brands__container-contents brands__container-contents-links">
+            <h3 class="links__subtitle"></h3>
+            <ul class="links__ul">
+                <li class="links__li">
+                    <a href="" class="links__link" title="Github">
+                        <Github />
+                    </a>
+                </li>
+                <li class="links__li">
+                    <a href="" class="links__link">
+                        <Instagram />
+                    </a>
+                </li>
+                <li class="links__li">
+                    <a href="" class="links__link">
+                        <Linkedin />
+                    </a>
+                </li>
+                <li class="links__li">
+                    <a href="" class="links__link">
+                        <Facebook />
+                    </a>
+                </li>
+                <li class="links__li">
+                    <a href="" class="links__link">
+                        <Gmail />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer__container footer__container-copy">
+        <p class="copy__text">&copy; Nicolás Alejandro Tapié - 2024</p>
+    </div>
+</footer>
+
+
+<style>
+.footer__img {
+    width: 4rem;
+    height: 4rem;
+}
+</style>

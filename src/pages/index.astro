@@ -1,9 +1,24 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro"
+import Cards from "@/components/Cards.astro";
+import Button from "@/components/Button.astro";
+
 ---
 
 
-<BaseLayout title="Memory | Selection">
+<BaseLayout title="Memory | Levels" description="Página de inico de la web. Muestra la selección de niveles disponibles para jugar">
 	
+    <section class="section__main">
+        <Cards content="10 tarjetas" class="card-1"/>
+        <Cards content="15 tarjetas" class="card-2"/>
+        <Cards content="20 tarjetas" class="card-3"/>
+    
+        <Button content="Jugar" />
+
+        <article class="main__cards-selection">
+
+        </article>
+    </section>
+
 </BaseLayout>	
 
