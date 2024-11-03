@@ -1,0 +1,23 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+
+  --color-beige: #f8fcc1;
+  --color-red: #cc0c39;
+  --color-blue: #1693a7;
+  --color-green: #c8cf02;
+  --color-orange: #e6781e;
+  --color-white: #ffffff;
+}
+
+body {
+  font-size: 1.6rem;
+  scroll-behavior: smooth;
+}

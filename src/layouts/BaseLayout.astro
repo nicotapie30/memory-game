@@ -2,6 +2,7 @@
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Fonts from "@/assets/fonts/Fonts.astro";
+import "@/assets/styles/reset.css";
 const { title, description } = Astro.props;
 ---
 
@@ -18,18 +19,35 @@ const { title, description } = Astro.props;
     <title>{title}</title>
 </head>
 <body>
-    <Header />
+    <div class="layout">
+        <Header />
 
-    <h1 class="title__title">Memory</h1>
+        <h1 class="title__title">Memory</h1>
 
-    <slot />
+        <slot />
 
-    <Footer />
+        <Footer />
+    </div>
 </body>
 </html>
 
+
+<!-- ESTILOS RESETADOS EN RESET.CSS -->
 <style>
-.title__title {
-    font-family: 'Exo 2';
-}
+    .layout {
+        width: 100%;
+        height: 100%;
+        padding: 0 5rem;
+        background: var(--color-beige);
+    }
+
+
+    .title__title {
+        font-family: 'Exo 2';
+        font-size: 10rem;
+        font-weight: 700;
+        text-align: center;
+        margin: 2rem 0 0 0;
+        color: var(--color-red);
+    }
 </style>

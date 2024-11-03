@@ -9,13 +9,33 @@ import GridCards from "@/components/GridCards.astro";
 <BaseLayout title="Memory | Levels" description="Página de inico de la web. Muestra la selección de niveles disponibles para jugar">
 	
     <section class="section__main">
-        <Cards content="10 tarjetas" class="card-1"/>
-        <Cards content="15 tarjetas" class="card-2"/>
-        <Cards content="20 tarjetas" class="card-3"/>
-    
+        <div class="main__cards-container">
+            <Cards content="10 tarjetas" class="card-1"/>
+            <Cards content="15 tarjetas" class="card-2"/>
+            <Cards content="20 tarjetas" class="card-3"/>
+        </div>    
+
         <Button content="Jugar" />
 
         <GridCards />
     </section>
 </BaseLayout>	
 
+
+<style>
+    .section__main {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .main__cards-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5rem;
+        margin: 15rem 0 8rem 0;
+    }
+</style>
