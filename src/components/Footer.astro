@@ -1,50 +1,17 @@
 ---
-import Github from "@/assets/icons/Github.astro";
-import Instagram from "@/assets/icons/Instagram.astro";
-import Linkedin from "@/assets/icons/Linkedin.astro";
-import Facebook from "@/assets/icons/Facebook.astro";
-import Email from "@/assets/icons/Email.astro";
+import Brands from "./Brands.astro";
+import Copy from "./Copy.astro";
+import LogoFooter from "./LogoFooter.astro"
 ---
 
 <footer class="footer">
-    <div class="brands__container-contents brands__container-contents-img">
-        <img class="footer__img" src="src/assets/Logo-Nico.webp" alt="Logo Nicolás" title="">
-    </div>
-    <div class="footer__container footer__container-brands">
-        <div class="brands__container-contents brands__container-contents-links">
-            <h3 class="links__subtitle">Contacto</h3>
-            <ul class="links__ul">
-                <li class="links__li">
-                    <a href="https://github.com/nicotapie30" class="links__link" title="Github" target="_blank">
-                        <Github class="links__item"/>
-                    </a>
-                </li>
-                <li class="links__li">
-                    <a href="https://www.instagram.com/nicotapie1/" class="links__link" title="Instagram" target="_blank">
-                        <Instagram class="links__item"/>
-                    </a>
-                </li>
-                <li class="links__li">
-                    <a href="https://www.linkedin.com/in/nicolasatapiedev30/" class="links__link" title="Linkedin" target="_blank">
-                        <Linkedin class="links__item"/>
-                    </a>
-                </li>
-                <li class="links__li">
-                    <a href="https://www.facebook.com/nico.tapie" class="links__link" title="Facebook" target="_blank">
-                        <Facebook class="links__item"/>
-                    </a>
-                </li>
-                <li class="links__li">
-                    <a href="mailto:nicoatapie@gmail.com" class="links__link" title="Email" target="_blank">
-                        <Email class="links__item"/>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer__container footer__container-copy">
-        <p class="copy__text">&copy; Nicolás Alejandro Tapié - 2024</p>
-    </div>
+    
+    <LogoFooter />
+
+    <Brands />
+    
+    <Copy />
+
 </footer>
 
 
@@ -55,64 +22,7 @@ import Email from "@/assets/icons/Email.astro";
         margin: 8rem 0 0 0;
         display: flex;
         flex-direction: column;
-        background: #ddd;
-    }
-
-    .footer__container-brands {
-        width: 100%;
-        display: flex;
         align-items: center;
-        justify-content: center;
+        background: #f8e8f8 ;
     }
-
-    .brands__container-contents {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .brands__container-contents-img {
-        width: 100%;
-        display: flex;
-        justify-content: start;
-        padding: 4rem 0 0 5rem;
-        margin: 0 0 1rem 0;
-    }
-
-    .footer__img {
-        width: 8rem;
-        height: 8rem;
-    }
-
-    .brands__container-contents-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .links__subtitle {
-        font-family: 'Exo 2';
-        font-size: 2.8rem;
-        font-weight: 700;
-        text-align: center;
-        letter-spacing: 0.1rem;
-        margin: 0 0 2rem 0;
-    }
-
-    .links__ul {
-        display: flex;
-        gap: 2.3rem;
-    }
-
-    .links__li {
-        list-style: none;
-    }
-
-
-    .links__link:hover{
-        color: var(--color-red);
-    }
-
-
 </style>

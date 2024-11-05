@@ -1,10 +1,36 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import GridCards from "@/components/GridCards.astro";
 import Button from "@/components/Button.astro";
 ---
 
-<BaseLayout>
-    <Button  content="Reiniciar"/>
-    <Button  content="Elegir Nivel"/>
+<BaseLayout title="Memory | Game" description="Página donde se juega con el nivel seleccionado y la cantidad de cartas seleccionadas hasta encontrar todas las coincidencias">
+    <section class="section__button">
+        <Button  content="Reiniciar" id="button-reiniciar"/>
+        <Button  content="Elegir Nivel" id="button-nivel"/>
+    </section>
 </BaseLayout>
+
+
+<style>
+    .section__button {
+        width: 100%;
+        margin: 5rem 0 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10rem;
+    }
+</style>
+
+<script>
+
+    const buttonReiniciar = document.querySelector('#button__reiniciar');
+    const buttonNivel = document.querySelector('#button-nivel');
+
+
+    buttonNivel.addEventListener('click', () => {
+
+        window.location.href = 'index.html';
+    });
+
+</script>

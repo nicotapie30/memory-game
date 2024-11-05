@@ -1,9 +1,9 @@
 ---
-const { content } = Astro.props;
+const { content, id } = Astro.props;
 ---
 <div class="main__button-container">
     
-    <button class="main__button">
+    <button class="main__button" {id}>
         {content}
     </button>
         
@@ -15,6 +15,7 @@ const { content } = Astro.props;
         font-size: 2.6rem;
         font-weight: 700;
         padding: 1.5rem 5rem;
+        margin-top: 8rem;
         border: none;
         outline: none;
         border-radius: 15px;
@@ -35,7 +36,7 @@ const { content } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: center;
-        left: 0;
+        left: -1px;
         top:0;
         border: none;
         border-radius: 15px;
@@ -55,7 +56,7 @@ const { content } = Astro.props;
     }
 
     .main__button:hover::after {
-        transform: translateX(0%);
+        transform: translateX(1%);
     }
 
     .main__button:hover::before {

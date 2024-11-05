@@ -5,15 +5,15 @@ import Button from "@/components/Button.astro";
 import GridCards from "@/components/GridCards.astro";
 ---
 
+<!-- HTML -->
+<BaseLayout title="Memory | Levels" description="Página de inico de la web Memory. Muestra la selección de niveles y la cantidad de cartas disponibles para jugar">
 
-<BaseLayout title="Memory | Levels" description="Página de inico de la web. Muestra la selección de niveles disponibles para jugar">
-	
+
     <section class="section__main">
-        <div class="main__cards-container">
-            <Cards content="10 tarjetas" class="card-1"/>
-            <Cards content="15 tarjetas" class="card-2"/>
-            <Cards content="20 tarjetas" class="card-3"/>
-        </div>    
+
+        
+        <Cards />
+
 
         <Button content="Jugar" />
 
@@ -22,6 +22,8 @@ import GridCards from "@/components/GridCards.astro";
 </BaseLayout>	
 
 
+
+<!-- CSS -->
 <style>
     .section__main {
         max-width: 100%;
@@ -30,13 +32,44 @@ import GridCards from "@/components/GridCards.astro";
         flex-direction: column;
         align-items: center;
     }
-
-
-    .main__cards-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 5rem;
-        margin: 15rem 0 8rem 0;
-    }
 </style>
+
+
+<script>
+    
+        const cards = document.querySelectorAll('.levels__items');
+        const gridCards = document.querySelector('.main__cards-selection');
+        const buttonGame = document.querySelector('.main__button');
+
+        // CARDS
+        cards.forEach(level => {
+
+            level.addEventListener('click', () => {
+
+                let count = parseInt(level.getAttribute('data-count'), 10);
+
+                gridCards.innerHTML = ''; 
+
+                for (let i = 0; i < count; i++) { 
+                    const card = document.createElement('div'); 
+                    card.classList.add('cards__card'); 
+                    card.style.width = '20rem'; 
+                    card.style.height = '25rem'; 
+                    card.style.padding = '1rem'; 
+                    card.style.borderRadius = '5px'; 
+                    card.style.boxShadow = '0px 0px 5px #212121'; 
+                    card.style.background = '#fff'; 
+                    gridCards.appendChild(card);
+                }
+            })
+        }); 
+
+
+        // BUTTON
+        buttonGame.addEventListener('click', () => {
+
+            window.location.href = 'Gaiming.html';
+        });
+
+
+</script>
