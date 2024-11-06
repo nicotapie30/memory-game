@@ -7,19 +7,17 @@ import GridCards from "@/components/GridCards.astro";
 
 <!-- HTML -->
 <BaseLayout title="Memory | Levels" description="Página de inico de la web Memory. Muestra la selección de niveles y la cantidad de cartas disponibles para jugar">
-
-
     <section class="section__main">
 
-        
         <Cards />
-
 
         <Button content="Jugar" />
 
         <GridCards />
+
     </section>
 </BaseLayout>	
+
 
 
 
@@ -35,8 +33,11 @@ import GridCards from "@/components/GridCards.astro";
 </style>
 
 
+
+
+<!-- JAVASCRIPT -->
 <script>
-    
+
         const cards = document.querySelectorAll('.levels__items');
         const gridCards = document.querySelector('.main__cards-selection');
         const buttonGame = document.querySelector('.main__button');
@@ -48,20 +49,31 @@ import GridCards from "@/components/GridCards.astro";
 
                 let count = parseInt(level.getAttribute('data-count'), 10);
 
-                gridCards.innerHTML = ''; 
-
                 for (let i = 0; i < count; i++) { 
                     const card = document.createElement('div'); 
                     card.classList.add('cards__card'); 
                     card.style.width = '20rem'; 
                     card.style.height = '25rem'; 
-                    card.style.padding = '1rem'; 
-                    card.style.borderRadius = '5px'; 
-                    card.style.boxShadow = '0px 0px 5px #212121'; 
-                    card.style.background = '#fff'; 
+                    card.style.padding = '1rem';
+                    card.style.display = 'flex';
+                    card.style.justifyContent = 'center';
+                    card.style.alignItems = 'center';
+                    card.style.border = '1px solid #003366';
+                    card.style.borderRadius = '10px'; 
+                    card.style.boxShadow = '0px 4px 8px rgba(0, 0, 0, 0.1)'; 
+                    card.style.background = 'linear-gradient(to bottom, #f0f8fd, #ffffff)'; 
+                    card.style.color = '#003366';
+                    card.style.fontFamily = 'Exo 2';
+                    card.style.fontSize = '2.8rem';
+                    card.style.fontWeight = '600';
+
+                    // Añadiendo texto
+                    card.textContent = 'Card';
+
+                    // Agregando elemento al grid
                     gridCards.appendChild(card);
                 }
-            })
+            })     
         }); 
 
 
@@ -70,6 +82,5 @@ import GridCards from "@/components/GridCards.astro";
 
             window.location.href = 'Gaiming.html';
         });
-
 
 </script>
