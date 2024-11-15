@@ -1,16 +1,24 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Button from "@/components/Button.astro";
+import GridCards from "@/components/GridCards.astro";
 ---
 
+<!-- HTML -->
 <BaseLayout title="Memory | Game" description="Página donde se juega con el nivel seleccionado y la cantidad de cartas seleccionadas hasta encontrar todas las coincidencias">
+    
     <section class="section__button">
         <Button  content="Reiniciar" id="button-reiniciar"/>
         <Button  content="Elegir Nivel" id="button-nivel"/>
     </section>
+
+    <GridCards />
+
 </BaseLayout>
 
 
+
+<!--- CSS -->
 <style>
     .section__button {
         width: 100%;
@@ -20,14 +28,180 @@ import Button from "@/components/Button.astro";
         align-items: center;
         gap: 10rem;
     }
+
+    .active {
+        transform: translateY(180deg);
+    }
 </style>
 
-<script>
 
+
+<!-- JAVASCRIPT -->
+<script>
     const buttonReiniciar = document.querySelector('#button__reiniciar');
     const buttonNivel = document.querySelector('#button-nivel');
+    const gridCards = document.querySelector('.main__cards-selection');
+
+    // Array de imágenes
+    const images = [
+        'src/assets/imgs/Angular.webp',
+        'src/assets/imgs/Astro.webp',
+        'src/assets/imgs/Bootstrap.webp',
+        'src/assets/imgs/Css.webp',
+        'src/assets/imgs/Git.webp',
+        'src/assets/imgs/Html.webp',
+        'src/assets/imgs/Java.webp',
+        'src/assets/imgs/JavaScript.webp',
+        'src/assets/imgs/MongoDB.webp',
+        'src/assets/imgs/Mysql.webp',
+        'src/assets/imgs/Nextjs.webp',
+        'src/assets/imgs/Nodejs.webp',
+        'src/assets/imgs/PHP.webp',
+        'src/assets/imgs/Postgre.webp',
+        'src/assets/imgs/React.webp',
+        'src/assets/imgs/Sqlite.webp',
+        'src/assets/imgs/Tailwind.webp',
+        'src/assets/imgs/VSCode.webp',
+        'src/assets/imgs/Vue.webp'
+    ];
 
 
+    const randomImage = () => {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        return images[randomIndex];
+    };
+
+
+
+    // Constantes para mostrar imágenes en las cartas
+    const cardsNumber = parseInt(localStorage.getItem('cantidadCartas')); 
+    const cardsGenerate = [];
+    let selectedCards = [];
+    let currentMove = 0;
+
+
+    const activate = (e) => {
+        if(currentMove < 2){
+            e.target.classList.add('active');
+
+            if (!selectedCards[0] || selectedCards[0] !== e.target) {
+                selectedCards.push(e.target);
+
+                if(++currentMove == 2){
+                    if(selectedCards[0].querySelectorAll('.card__face')[0].style.backgroundImage == selectedCards[1].querySelectorAll('.card__face')[0].style.backgroundImage){
+                        selectedCards = [];
+                        currentMove = 0;
+                    }else {
+                        setTimeout(()=> {
+                            selectedCards[0].classList.remove('active');
+                            selectedCards[1].classList.remove('active');
+                            selectedCards[0].style.transform = 'rotateY(0deg)';
+                            selectedCards[1].style.transform = 'rotateY(0deg)';
+                            selectedCards = [];
+                            currentMove = 0;
+                        },600);
+                    }
+                }
+            }
+        }
+    };
+
+
+    const generateUniquePairs = (numPairs) => { 
+        const values = []; 
+        for (let i = 0; i < numPairs; i++) { 
+            values.push(i, i);  
+        } 
+        return values.sort(() => Math.random() - 0.5); 
+    }; 
+
+    const valuesUsed = generateUniquePairs(cardsNumber / 2);
+
+
+    for (let i = 0; i < cardsNumber; i++) {
+        
+        // Contenedor de las cards
+        const containerCard = document.createElement('div');
+        containerCard.classList.add('container__card');
+        containerCard.style.width = '20rem';
+        containerCard.style.height = '25rem';
+        containerCard.style.padding = '1rem';
+        containerCard.style.borderRadius = '10px';
+        containerCard.style.border = '1px solid #283C56';
+        containerCard.style.position = 'relative';
+        containerCard.style.transition = 'transform 0.5s';
+        containerCard.style.transformStyle = 'preserve-3d';
+        containerCard.style.display = 'flex';
+        containerCard.style.justifyContent = 'center';
+        containerCard.style.alignItems = 'center';
+        containerCard.style.cursor = 'pointer';
+
+        containerCard.addEventListener('click', () => {
+            containerCard.style.transform = 'rotateY(180deg)';
+            
+        });
+        
+
+
+        // Front de las cards
+        const cardFace = document.createElement('div');
+        cardFace.classList.add('card__face');
+        cardFace.style.width = '85%';
+        cardFace.style.height = '100%';
+        cardFace.style.borderRadius = '8px';
+        cardFace.style.display = 'flex';
+        cardFace.style.justifyContent = 'center';
+        cardFace.style.alignItems = 'center';
+        cardFace.style.position =  'absolute';
+        cardFace.style.backfaceVisibility = 'hidden';
+        cardFace.style.pointerEvents = 'none';
+        cardFace.style.transform = 'rotateY(180deg)';
+        cardFace.style.backgroundImage = `url(${images[valuesUsed[i]]})`;
+        cardFace.style.backgroundPosition = 'center';
+        cardFace.style.backgroundSize = 'contain';
+        cardFace.style.backgroundRepeat = 'no-Repeat';
+
+
+
+
+        // Back de las cards
+        const cardBack = document.createElement('div');
+        cardBack.classList.add('card__back');
+        cardBack.style.width = '100%';
+        cardBack.style.height = '100%';
+        cardBack.style.border = '1px solid #283C56';
+        cardBack.style.borderRadius = '10px';
+        cardBack.style.display = 'flex';
+        cardBack.style.justifyContent = 'center';
+        cardBack.style.alignItems = 'center';
+        cardBack.style.position =  'absolute';
+        cardBack.style.backfaceVisibility = 'hidden';
+        cardBack.style.pointerEvents = 'none';
+        cardBack.style.border = '2px solid #003366';
+        cardBack.style.background = '#283C56';
+        cardBack.style.fontFamily = 'Exo 2';
+        cardBack.style.fontSize = '2.8rem';
+        cardBack.textContent = 'Memory';
+        cardBack.style.color = 'var(--color-white)';
+
+
+        containerCard.appendChild(cardFace);
+        containerCard.appendChild(cardBack);
+        gridCards.appendChild(containerCard);
+
+
+        
+        containerCard.addEventListener('click', activate);
+    };
+
+
+
+
+
+
+
+
+    // BUTTON
     buttonNivel.addEventListener('click', () => {
 
         window.location.href = 'index.html';
