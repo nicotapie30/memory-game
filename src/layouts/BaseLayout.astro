@@ -40,7 +40,6 @@ const { title, description } = Astro.props;
         background: radial-gradient(ellipse 80% 80% at 50% -20%, var(--color-beige),rgba(255,235,235,0.6));
     }
 
-
     .title__title {
         font-family: 'Exo 2';
         font-size: 15rem;
@@ -49,4 +48,51 @@ const { title, description } = Astro.props;
         margin: 2rem 0 5rem 0;
         color: var(--color-red);
     }
+
+
+    .layout {
+        transition: opacity 0.5s ease-in-out, 
+        transform 0.5s ease-in-out;
+    }
+
+    .view-transition-enter {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .view-transition-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .view-transition-exit {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .view-transition-exit-active {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 </style>
+
+
+<script>
+
+    const viewTransition = document.querySelector('.layout');
+
+    // Agregar clases de animación de entrada
+    viewTransition.classList.add('view-transition-enter');
+    requestAnimationFrame(() => {
+        viewTransition.classList.add('view-transition-enter-active');
+    });
+
+    // Agregar clases de animación de salida
+    window.addEventListener('beforeunload', () => {
+        viewTransition.classList.add('view-transition-exit');
+        requestAnimationFrame(() => {
+            viewTransition.classList.add('view-transition-exit-active');
+        });
+    });
+
+</script>

@@ -101,3 +101,18 @@
         transition: all 200ms ease;
     }
 </style>
+
+
+
+<script>
+    const levelsItems = document.querySelectorAll('.levels__items');
+    const selectionSound = new Audio('src/assets/sounds/Selection.mp3');
+
+
+    levelsItems.forEach(levels => {
+        levels.addEventListener('click', () => {
+            selectionSound.play();
+        });
+    });
+
+</script>

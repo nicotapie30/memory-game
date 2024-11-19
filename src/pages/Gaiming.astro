@@ -2,17 +2,22 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Button from "@/components/Button.astro";
 import GridCards from "@/components/GridCards.astro";
+import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 ---
 
 <!-- HTML -->
 <BaseLayout title="Memory | Game" description="Página donde se juega con el nivel seleccionado y la cantidad de cartas seleccionadas hasta encontrar todas las coincidencias">
-    
-    <section class="section__button">
-        <Button  content="Reiniciar" id="button-reiniciar"/>
-        <Button  content="Elegir Nivel" id="button-nivel"/>
-    </section>
 
-    <GridCards />
+        <section class="section__button">
+
+            <Button className="restart__button" content="Reiniciar" id="button-reiniciar"/>
+            <Button  className="select__button" content="Elegir Nivel" id="button-nivel"/>
+
+        </section>
+
+        <GridCards />
+
+        <CongratulationsMessage />
 
 </BaseLayout>
 
@@ -32,15 +37,21 @@ import GridCards from "@/components/GridCards.astro";
     .active {
         transform: translateY(180deg);
     }
+
 </style>
 
 
 
 <!-- JAVASCRIPT -->
 <script>
-    const buttonReiniciar = document.querySelector('#button__reiniciar');
-    const buttonNivel = document.querySelector('#button-nivel');
+    import confetti from 'canvas-confetti';
+    const restartButton = document.querySelector('#button-reiniciar');
+    const selectButton = document.querySelector('#button-nivel');
     const gridCards = document.querySelector('.main__cards-selection');
+    const flipSound = new Audio('src/assets/sounds/Flipcard.mp3');
+    const congratulationsMessage = document.querySelector('#congratulationsMessage');
+    const congratulationsSound = new Audio('src//assets/sounds/Congratulations.mp3');
+
 
     // Array de imágenes
     const images = [
@@ -66,23 +77,18 @@ import GridCards from "@/components/GridCards.astro";
     ];
 
 
-    const randomImage = () => {
-        const randomIndex = Math.floor(Math.random() * images.length);
-        return images[randomIndex];
-    };
-
-
 
     // Constantes para mostrar imágenes en las cartas
     const cardsNumber = parseInt(localStorage.getItem('cantidadCartas')); 
-    const cardsGenerate = [];
     let selectedCards = [];
     let currentMove = 0;
+    let pairsfound = 0;
 
 
     const activate = (e) => {
         if(currentMove < 2){
             e.target.classList.add('active');
+            flipSound.play();
 
             if (!selectedCards[0] || selectedCards[0] !== e.target) {
                 selectedCards.push(e.target);
@@ -91,6 +97,11 @@ import GridCards from "@/components/GridCards.astro";
                     if(selectedCards[0].querySelectorAll('.card__face')[0].style.backgroundImage == selectedCards[1].querySelectorAll('.card__face')[0].style.backgroundImage){
                         selectedCards = [];
                         currentMove = 0;
+                        pairsfound++;
+                        if (pairsfound === cardsNumber / 2) {
+                            showCongratulationsMessage();
+                            showConfeti();
+                        };
                     }else {
                         setTimeout(()=> {
                             selectedCards[0].classList.remove('active');
@@ -115,7 +126,14 @@ import GridCards from "@/components/GridCards.astro";
         return values.sort(() => Math.random() - 0.5); 
     }; 
 
+
+
+    const createCards = () => {
+        gridCards.innerHTML = '';
+
     const valuesUsed = generateUniquePairs(cardsNumber / 2);
+    pairsfound = 0;
+    congratulationsMessage.classList.remove('congratulations__message-show');
 
 
     for (let i = 0; i < cardsNumber; i++) {
@@ -138,7 +156,6 @@ import GridCards from "@/components/GridCards.astro";
 
         containerCard.addEventListener('click', () => {
             containerCard.style.transform = 'rotateY(180deg)';
-            
         });
         
 
@@ -170,7 +187,7 @@ import GridCards from "@/components/GridCards.astro";
         cardBack.style.width = '100%';
         cardBack.style.height = '100%';
         cardBack.style.border = '1px solid #283C56';
-        cardBack.style.borderRadius = '10px';
+        cardBack.style.borderRadius = '8px';
         cardBack.style.display = 'flex';
         cardBack.style.justifyContent = 'center';
         cardBack.style.alignItems = 'center';
@@ -193,18 +210,51 @@ import GridCards from "@/components/GridCards.astro";
         
         containerCard.addEventListener('click', activate);
     };
+}
+
+    // Mensaje de felicitaciones
+    const showCongratulationsMessage = () => {
+        congratulationsMessage.classList.add('congratulations__message-show');
+        gridCards.innerHTML = '';
+        congratulationsSound.play();
+    };
+
+    // Generar confeti 
+    const showConfeti = () => {
+        confetti({
+            particleCount: 200,
+            spread: 80,
+            origin: { y: 0.5 }
+        });
+    };
+
+
+    createCards();
+
+    // Reiniciar cartas
+    restartButton.addEventListener('click', () => {
+        selectedCards = [];
+        currentMove = 0;
+        createCards();
+    })
 
 
 
 
 
+    // BUTTONS
 
-
-
-    // BUTTON
-    buttonNivel.addEventListener('click', () => {
+    // Botón de niveles
+    selectButton.addEventListener('click', () => {
+    
 
         window.location.href = 'index.html';
     });
 
+    selectButton.setAttribute('data-content', 'Seleccionar');
+
+
+    // Botón de reiniciar
+    restartButton.setAttribute('data-content', 'Comenzar');
+        
 </script>

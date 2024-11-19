@@ -7,15 +7,16 @@ import GridCards from "@/components/GridCards.astro";
 
 <!-- HTML -->
 <BaseLayout title="Memory | Levels" description="Página de inico de la web Memory. Muestra la selección de niveles y la cantidad de cartas disponibles para jugar">
-    <section class="section__main">
+    
+        <section class="section__main">
 
-        <Cards />
+            <Cards />
 
-        <Button content="Jugar" />
+            <Button content="Jugar" className="play__button" id="play" />
 
-        <GridCards />
+            <GridCards />
 
-    </section>
+        </section>
 </BaseLayout>	
 
 
@@ -23,6 +24,7 @@ import GridCards from "@/components/GridCards.astro";
 
 <!-- CSS -->
 <style>
+
     .section__main {
         max-width: 100%;
         padding: 0 5rem;
@@ -35,6 +37,7 @@ import GridCards from "@/components/GridCards.astro";
         transform: scale(1.05);
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
     }
+
 </style>
 
 
@@ -46,7 +49,8 @@ import GridCards from "@/components/GridCards.astro";
 
         const cards = document.querySelectorAll('.levels__items');
         const gridCards = document.querySelector('.main__cards-selection');
-        const buttonGame = document.querySelector('.main__button');
+        const buttonGame = document.querySelector('#play');
+        
 
         // CARDS
         cards.forEach(level => {
@@ -104,10 +108,14 @@ import GridCards from "@/components/GridCards.astro";
         }); 
 
 
-        // BUTTON
+        // BUTTONS
         buttonGame.addEventListener('click', () => {
-
             window.location.href = 'Gaiming.html';
         });
 
+        
+        const button = document.querySelector('#play');
+        button.setAttribute('data-content', 'Iniciar');
+
+        
 </script>

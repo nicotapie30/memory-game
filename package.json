@@ -10,7 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.16.8"
+    "astro": "^4.16.8",
+    "canvas-confetti": "^1.9.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

@@ -1,16 +1,16 @@
 ---
-const { content, id } = Astro.props;
+const { content, id, className } = Astro.props;
 ---
 <div class="main__button-container">
     
-    <button class="main__button" {id}>
+    <button class={className} {id} data-content={content}>
         {content}
     </button>
         
 </div>
 
 <style>
-    .main__button {
+    button {
         font-family: 'Exo 2';
         font-size: 2.6rem;
         font-weight: 700;
@@ -27,9 +27,9 @@ const { content, id } = Astro.props;
         overflow: hidden;
     }
 
-    .main__button::before,
-    .main__button::after {
-        content: "Iniciar";
+    button::before,
+    button::after {
+        content: attr(data-content);
         position: absolute;
         width: 100%;
         height: 100%;
@@ -45,21 +45,22 @@ const { content, id } = Astro.props;
         transition: transform 0.3s ease;
     }
 
-    .main__button::after {
+    button::after {
         transform: translateX(-100%);
         transform-origin: left;
     }
 
-    .main__button::before {
+    button::before {
         transform: translateX(-100%);
         transform-origin: left;
     }
 
-    .main__button:hover::after {
+    button:hover::after {
         transform: translateX(1%);
     }
 
-    .main__button:hover::before {
+    button:hover::before {
         transform: translateX(0%);
     }
 </style>
+
