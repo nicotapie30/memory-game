@@ -22,7 +22,7 @@ const { title, description } = Astro.props;
     <div class="layout">
         <Header />
 
-        <h1 class="title__title">Memory</h1>
+        <h1 class="title__title"></h1>
 
         <slot />
 
@@ -38,14 +38,16 @@ const { title, description } = Astro.props;
         width: 100%;
         height: 100%;
         background: radial-gradient(ellipse 80% 80% at 50% -20%, var(--color-beige),rgba(255,235,235,0.6));
+        overflow-x: hidden;
     }
 
     .title__title {
+        height: 18rem;
         font-family: 'Exo 2';
-        font-size: 15rem;
+        font-size: 17rem;
         font-weight: 700;
         text-align: center;
-        margin: 2rem 0 5rem 0;
+        margin: 2rem 0 7rem 0;
         color: var(--color-red);
     }
 
@@ -79,20 +81,44 @@ const { title, description } = Astro.props;
 
 <script>
 
-    const viewTransition = document.querySelector('.layout');
+    const layout = document.querySelector('.layout');
+    const title = document.querySelector('.title__title');
+    
 
     // Agregar clases de animación de entrada
-    viewTransition.classList.add('view-transition-enter');
+    layout.classList.add('view-transition-enter');
     requestAnimationFrame(() => {
-        viewTransition.classList.add('view-transition-enter-active');
+        layout.classList.add('view-transition-enter-active');
     });
 
     // Agregar clases de animación de salida
     window.addEventListener('beforeunload', () => {
-        viewTransition.classList.add('view-transition-exit');
+        layout.classList.add('view-transition-exit');
         requestAnimationFrame(() => {
-            viewTransition.classList.add('view-transition-exit-active');
+            layout.classList.add('view-transition-exit-active');
         });
     });
+
+
+
+    // Efecto del título
+    let text = 'Memory';
+
+    let letterStart = 0;
+    let letterEnd = 1;
+
+
+    const write = () => {
+        setInterval(() => {
+            title.innerHTML = text.slice(letterStart, letterEnd);
+
+            letterEnd++;
+
+            letterEnd > text.length ? letterEnd = text.length : '';
+
+        }, 700)
+    };
+
+    write();
 
 </script>

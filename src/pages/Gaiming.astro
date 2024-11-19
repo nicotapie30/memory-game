@@ -51,6 +51,8 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
     const flipSound = new Audio('src/assets/sounds/Flipcard.mp3');
     const congratulationsMessage = document.querySelector('#congratulationsMessage');
     const congratulationsSound = new Audio('src//assets/sounds/Congratulations.mp3');
+    const backgroundSound = new Audio('src/assets/sounds/backgroundSoundGame.mp3');
+    const correctSound = new Audio('src/assets/sounds/correct.mp3'); 
 
 
     // Array de imágenes
@@ -87,25 +89,24 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
     const activate = (e) => {
         if(currentMove < 2){
-            e.target.classList.add('active');
+            const card = e.target.closest('.container__card'); 
             flipSound.play();
 
-            if (!selectedCards[0] || selectedCards[0] !== e.target) {
-                selectedCards.push(e.target);
+            if (!selectedCards[0] || selectedCards[0] !== card) {
+                selectedCards.push(card);
 
                 if(++currentMove == 2){
                     if(selectedCards[0].querySelectorAll('.card__face')[0].style.backgroundImage == selectedCards[1].querySelectorAll('.card__face')[0].style.backgroundImage){
                         selectedCards = [];
                         currentMove = 0;
                         pairsfound++;
+                        correctAudio();
                         if (pairsfound === cardsNumber / 2) {
                             showCongratulationsMessage();
                             showConfeti();
                         };
                     }else {
                         setTimeout(()=> {
-                            selectedCards[0].classList.remove('active');
-                            selectedCards[1].classList.remove('active');
                             selectedCards[0].style.transform = 'rotateY(0deg)';
                             selectedCards[1].style.transform = 'rotateY(0deg)';
                             selectedCards = [];
@@ -118,6 +119,7 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
     };
 
 
+    // Generar parejas
     const generateUniquePairs = (numPairs) => { 
         const values = []; 
         for (let i = 0; i < numPairs; i++) { 
@@ -127,9 +129,9 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
     }; 
 
 
-
+    // Crear cartas
     const createCards = () => {
-        gridCards.innerHTML = '';
+    gridCards.innerHTML = '';
 
     const valuesUsed = generateUniquePairs(cardsNumber / 2);
     pairsfound = 0;
@@ -156,6 +158,14 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
         containerCard.addEventListener('click', () => {
             containerCard.style.transform = 'rotateY(180deg)';
+        });
+
+        containerCard.addEventListener('mouseover', () => {
+            containerCard.style.boxShadow = '0px 0px 12px rgba(0, 0, 0, 0.8)';
+        });
+
+        containerCard.addEventListener('mouseout', () => {
+            containerCard.style.boxShadow = 'none';
         });
         
 
@@ -198,6 +208,7 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
         cardBack.style.background = '#283C56';
         cardBack.style.fontFamily = 'Exo 2';
         cardBack.style.fontSize = '2.8rem';
+        cardBack.style.fontWeight = '600';
         cardBack.textContent = 'Memory';
         cardBack.style.color = 'var(--color-white)';
 
@@ -212,20 +223,24 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
     };
 }
 
-    // Mensaje de felicitaciones
+    // Mensaje de felicitaciones    
     const showCongratulationsMessage = () => {
-        congratulationsMessage.classList.add('congratulations__message-show');
+        setTimeout(() => {
+            congratulationsMessage.classList.add('congratulations__message-show');
         gridCards.innerHTML = '';
         congratulationsSound.play();
+    }, 600)
     };
 
     // Generar confeti 
     const showConfeti = () => {
-        confetti({
+        setTimeout(() => {
+            confetti({
             particleCount: 200,
             spread: 80,
             origin: { y: 0.5 }
-        });
+            });
+        }, 600);
     };
 
 
@@ -239,6 +254,23 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
     })
 
 
+    // Sonido de fondo
+    const listenAudio = () => {
+        backgroundSound.play();
+        backgroundSound.volume = 0.2;
+        
+        backgroundSound.addEventListener('ended', () => {
+            backgroundSound.currentTime = 0;
+            backgroundSound.play();
+        });
+    };
+    listenAudio();
+
+
+    // Sonido de parejas
+    const correctAudio = () => {
+        correctSound.play();
+    };
 
 
 

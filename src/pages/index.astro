@@ -50,6 +50,7 @@ import GridCards from "@/components/GridCards.astro";
         const cards = document.querySelectorAll('.levels__items');
         const gridCards = document.querySelector('.main__cards-selection');
         const buttonGame = document.querySelector('#play');
+        const backgroundSound = new Audio('src/assets/sounds/backgroundSound.mp3');
         
 
         // CARDS
@@ -117,5 +118,17 @@ import GridCards from "@/components/GridCards.astro";
         const button = document.querySelector('#play');
         button.setAttribute('data-content', 'Iniciar');
 
+
+        // Sonido de fondo
+        const listenSound = () => {
+            backgroundSound.play();
+            backgroundSound.volume = 0.2;
+            backgroundSound.addEventListener('ended', () => {
+                backgroundSound.currentTime = 0;
+                backgroundSound.play();
+            })
+        }
+
+        listenSound();
         
 </script>
