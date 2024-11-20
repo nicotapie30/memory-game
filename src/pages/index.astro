@@ -48,7 +48,9 @@ import GridCards from "@/components/GridCards.astro";
         const cards = document.querySelectorAll('.levels__items');
         const gridCards = document.querySelector('.main__cards-selection');
         const buttonGame = document.querySelector('#play');
+        const buttonMusic = document.querySelector('#music');
         const backgroundSound = new Audio('./sounds/BackgroundSound.mp3');
+        
         
 
         // CARDS
@@ -115,11 +117,34 @@ import GridCards from "@/components/GridCards.astro";
 
         const button = document.querySelector('#play');
         button.setAttribute('data-content', 'Iniciar');
-
         
 
-        // Sonido de fondo
-        const listenSound = () => {
+
+        // SONIDOS 
+        let isActive = false;
+
+        buttonMusic.addEventListener('mouseover', () => {
+            if(!isActive){
+                buttonMusic.setAttribute('data-content', 'Activar');
+
+            }else {
+                buttonMusic.setAttribute('data-content', 'Desactivar');
+            };
+        });  
+        
+        buttonMusic.addEventListener('click', () => {
+            if (isActive = !isActive) {
+                buttonMusic.setAttribute('data-content', 'Activar');
+                
+                playSound();
+            }else {
+                buttonMusic.setAttribute('data-content', 'Desactivar');
+
+                pauseSound();
+            };
+        });
+
+        const playSound = () => {
             backgroundSound.play();
             backgroundSound.volume = 0.2;
             backgroundSound.addEventListener('ended', () => {
@@ -128,6 +153,8 @@ import GridCards from "@/components/GridCards.astro";
             })
         }
 
-        listenSound();
+        const pauseSound = () => {
+            backgroundSound.pause();
+        };
         
 </script>
