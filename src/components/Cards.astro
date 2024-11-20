@@ -2,6 +2,7 @@
 
 ---
 
+<!-- HTML -->
 <div class="container__levels">
 
     <article class="levels__items" id="card1" data-count="10">
@@ -19,8 +20,9 @@
 </div>
 
 
-<style>
 
+<!-- CSS -->
+<style>
 
     .container__levels {
         display: flex;
@@ -33,7 +35,7 @@
     .levels__items {
         width: 25rem;
         height: 25rem;
-        background-image: url('../assets/Cards-background.webp');
+        background-image: url('../assets/imgs/Cards-background.webp');
         background-position: center;
         background-size: cover;
         display: flex;
@@ -100,11 +102,14 @@
         color: var(--color-white);
         transition: all 200ms ease;
     }
+
 </style>
 
 
 
+<!-- JavaScript -->
 <script>
+
     const levelsItems = document.querySelectorAll('.levels__items');
     const selectionSound = new Audio('src/assets/sounds/Selection.mp3');
 

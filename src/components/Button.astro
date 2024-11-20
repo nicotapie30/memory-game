@@ -1,6 +1,8 @@
 ---
 const { content, id, className } = Astro.props;
 ---
+
+<!-- HTML -->
 <div class="main__button-container">
     
     <button class={className} {id} data-content={content}>
@@ -9,7 +11,11 @@ const { content, id, className } = Astro.props;
         
 </div>
 
+
+
+<!-- CSS -->
 <style>
+
     button {
         font-family: 'Exo 2';
         font-size: 2.6rem;
@@ -62,5 +68,6 @@ const { content, id, className } = Astro.props;
     button:hover::before {
         transform: translateX(0%);
     }
+    
 </style>
 

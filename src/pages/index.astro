@@ -7,7 +7,6 @@ import GridCards from "@/components/GridCards.astro";
 
 <!-- HTML -->
 <BaseLayout title="Memory | Levels" description="Página de inico de la web Memory. Muestra la selección de niveles y la cantidad de cartas disponibles para jugar">
-    
         <section class="section__main">
 
             <Cards />
@@ -16,7 +15,7 @@ import GridCards from "@/components/GridCards.astro";
 
             <GridCards />
 
-        </section>
+        </section>  
 </BaseLayout>	
 
 
@@ -45,7 +44,6 @@ import GridCards from "@/components/GridCards.astro";
 
 <!-- JAVASCRIPT -->
 <script>
-
 
         const cards = document.querySelectorAll('.levels__items');
         const gridCards = document.querySelector('.main__cards-selection');
@@ -89,12 +87,13 @@ import GridCards from "@/components/GridCards.astro";
 
 
                     
-                    // Añadiendo texto
+                    // Añadir texto
                     card.textContent = `Carta ${i + 1}`;
 
-                    // Agregando elemento al grid
+                    // Agregar elemento al grid
                     gridCards.appendChild(card);
 
+                    // Agregar eventos a las cards
                     card.addEventListener('mouseover', () => {
                         card.style.transform = 'scale(1.05)';
                         card.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
@@ -114,10 +113,10 @@ import GridCards from "@/components/GridCards.astro";
             window.location.href = 'Gaiming.html';
         });
 
-        
         const button = document.querySelector('#play');
         button.setAttribute('data-content', 'Iniciar');
 
+        
 
         // Sonido de fondo
         const listenSound = () => {

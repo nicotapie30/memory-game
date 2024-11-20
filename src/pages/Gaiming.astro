@@ -7,7 +7,6 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
 <!-- HTML -->
 <BaseLayout title="Memory | Game" description="Página donde se juega con el nivel seleccionado y la cantidad de cartas seleccionadas hasta encontrar todas las coincidencias">
-
         <section class="section__button">
 
             <Button className="restart__button" content="Reiniciar" id="button-reiniciar"/>
@@ -18,13 +17,13 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
         <GridCards />
 
         <CongratulationsMessage />
-
 </BaseLayout>
 
 
 
 <!--- CSS -->
 <style>
+
     .section__button {
         width: 100%;
         margin: 5rem 0 0 0;
@@ -44,6 +43,7 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
 <!-- JAVASCRIPT -->
 <script>
+
     import confetti from 'canvas-confetti';
     const restartButton = document.querySelector('#button-reiniciar');
     const selectButton = document.querySelector('#button-nivel');
@@ -80,13 +80,15 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
 
 
-    // Constantes para mostrar imágenes en las cartas
+    // Obtener cantidad de imágenes en las cards
     const cardsNumber = parseInt(localStorage.getItem('cantidadCartas')); 
+
     let selectedCards = [];
     let currentMove = 0;
     let pairsfound = 0;
 
 
+    // Activación de una card
     const activate = (e) => {
         if(currentMove < 2){
             const card = e.target.closest('.container__card'); 
@@ -103,7 +105,7 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
                         correctAudio();
                         if (pairsfound === cardsNumber / 2) {
                             showCongratulationsMessage();
-                            showConfeti();
+                            showConfetti();
                         };
                     }else {
                         setTimeout(()=> {
@@ -131,127 +133,128 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
     // Crear cartas
     const createCards = () => {
-    gridCards.innerHTML = '';
+        gridCards.innerHTML = '';
 
-    const valuesUsed = generateUniquePairs(cardsNumber / 2);
-    pairsfound = 0;
-    congratulationsMessage.classList.remove('congratulations__message-show');
-
-
-    for (let i = 0; i < cardsNumber; i++) {
-        
-        // Contenedor de las cards
-        const containerCard = document.createElement('div');
-        containerCard.classList.add('container__card');
-        containerCard.style.width = '20rem';
-        containerCard.style.height = '25rem';
-        containerCard.style.padding = '1rem';
-        containerCard.style.borderRadius = '10px';
-        containerCard.style.border = '1px solid #283C56';
-        containerCard.style.position = 'relative';
-        containerCard.style.transition = 'transform 0.5s';
-        containerCard.style.transformStyle = 'preserve-3d';
-        containerCard.style.display = 'flex';
-        containerCard.style.justifyContent = 'center';
-        containerCard.style.alignItems = 'center';
-        containerCard.style.cursor = 'pointer';
-
-        containerCard.addEventListener('click', () => {
-            containerCard.style.transform = 'rotateY(180deg)';
-        });
-
-        containerCard.addEventListener('mouseover', () => {
-            containerCard.style.boxShadow = '0px 0px 12px rgba(0, 0, 0, 0.8)';
-        });
-
-        containerCard.addEventListener('mouseout', () => {
-            containerCard.style.boxShadow = 'none';
-        });
-        
+        const valuesUsed = generateUniquePairs(cardsNumber / 2);
+        pairsfound = 0;
+        congratulationsMessage.classList.remove('congratulations__message-show');
 
 
-        // Front de las cards
-        const cardFace = document.createElement('div');
-        cardFace.classList.add('card__face');
-        cardFace.style.width = '85%';
-        cardFace.style.height = '100%';
-        cardFace.style.borderRadius = '8px';
-        cardFace.style.display = 'flex';
-        cardFace.style.justifyContent = 'center';
-        cardFace.style.alignItems = 'center';
-        cardFace.style.position =  'absolute';
-        cardFace.style.backfaceVisibility = 'hidden';
-        cardFace.style.pointerEvents = 'none';
-        cardFace.style.transform = 'rotateY(180deg)';
-        cardFace.style.backgroundImage = `url(${images[valuesUsed[i]]})`;
-        cardFace.style.backgroundPosition = 'center';
-        cardFace.style.backgroundSize = 'contain';
-        cardFace.style.backgroundRepeat = 'no-Repeat';
+        for (let i = 0; i < cardsNumber; i++) {
+            
+            // Contenedor de las cards
+            const containerCard = document.createElement('div');
+            containerCard.classList.add('container__card');
+            containerCard.style.width = '20rem';
+            containerCard.style.height = '25rem';
+            containerCard.style.padding = '1rem';
+            containerCard.style.borderRadius = '10px';
+            containerCard.style.border = '1px solid #283C56';
+            containerCard.style.position = 'relative';
+            containerCard.style.transition = 'transform 0.5s';
+            containerCard.style.transformStyle = 'preserve-3d';
+            containerCard.style.display = 'flex';
+            containerCard.style.justifyContent = 'center';
+            containerCard.style.alignItems = 'center';
+            containerCard.style.cursor = 'pointer';
+
+            containerCard.addEventListener('click', () => {
+                containerCard.style.transform = 'rotateY(180deg)';
+            });
+
+            containerCard.addEventListener('mouseover', () => {
+                containerCard.style.boxShadow = '0px 0px 12px rgba(0, 0, 0, 0.8)';
+            });
+
+            containerCard.addEventListener('mouseout', () => {
+                containerCard.style.boxShadow = 'none';
+            });
+            
+
+
+            // Front de las cards
+            const cardFace = document.createElement('div');
+            cardFace.classList.add('card__face');
+            cardFace.style.width = '85%';
+            cardFace.style.height = '100%';
+            cardFace.style.borderRadius = '8px';
+            cardFace.style.display = 'flex';
+            cardFace.style.justifyContent = 'center';
+            cardFace.style.alignItems = 'center';
+            cardFace.style.position =  'absolute';
+            cardFace.style.backfaceVisibility = 'hidden';
+            cardFace.style.pointerEvents = 'none';
+            cardFace.style.transform = 'rotateY(180deg)';
+            cardFace.style.backgroundImage = `url(${images[valuesUsed[i]]})`;
+            cardFace.style.backgroundPosition = 'center';
+            cardFace.style.backgroundSize = 'contain';
+            cardFace.style.backgroundRepeat = 'no-Repeat';
 
 
 
 
-        // Back de las cards
-        const cardBack = document.createElement('div');
-        cardBack.classList.add('card__back');
-        cardBack.style.width = '100%';
-        cardBack.style.height = '100%';
-        cardBack.style.border = '1px solid #283C56';
-        cardBack.style.borderRadius = '8px';
-        cardBack.style.display = 'flex';
-        cardBack.style.justifyContent = 'center';
-        cardBack.style.alignItems = 'center';
-        cardBack.style.position =  'absolute';
-        cardBack.style.backfaceVisibility = 'hidden';
-        cardBack.style.pointerEvents = 'none';
-        cardBack.style.border = '2px solid #003366';
-        cardBack.style.background = '#283C56';
-        cardBack.style.fontFamily = 'Exo 2';
-        cardBack.style.fontSize = '2.8rem';
-        cardBack.style.fontWeight = '600';
-        cardBack.textContent = 'Memory';
-        cardBack.style.color = 'var(--color-white)';
+            // Back de las cards
+            const cardBack = document.createElement('div');
+            cardBack.classList.add('card__back');
+            cardBack.style.width = '100%';
+            cardBack.style.height = '100%';
+            cardBack.style.border = '1px solid #283C56';
+            cardBack.style.borderRadius = '8px';
+            cardBack.style.display = 'flex';
+            cardBack.style.justifyContent = 'center';
+            cardBack.style.alignItems = 'center';
+            cardBack.style.position =  'absolute';
+            cardBack.style.backfaceVisibility = 'hidden';
+            cardBack.style.pointerEvents = 'none';
+            cardBack.style.border = '2px solid #003366';
+            cardBack.style.background = '#283C56';
+            cardBack.style.fontFamily = 'Exo 2';
+            cardBack.style.fontSize = '2.8rem';
+            cardBack.style.fontWeight = '600';
+            cardBack.textContent = 'Memory';
+            cardBack.style.color = 'var(--color-white)';
 
 
-        containerCard.appendChild(cardFace);
-        containerCard.appendChild(cardBack);
-        gridCards.appendChild(containerCard);
+            containerCard.appendChild(cardFace);
+            containerCard.appendChild(cardBack);
+            gridCards.appendChild(containerCard);
 
 
-        
-        containerCard.addEventListener('click', activate);
-    };
-}
+            
+            containerCard.addEventListener('click', activate);
+        };
+    }
 
     // Mensaje de felicitaciones    
     const showCongratulationsMessage = () => {
         setTimeout(() => {
             congratulationsMessage.classList.add('congratulations__message-show');
-        gridCards.innerHTML = '';
-        congratulationsSound.play();
-    }, 600)
+            gridCards.innerHTML = '';
+            congratulationsSound.play();
+        }, 600)
     };
 
-    // Generar confeti 
-    const showConfeti = () => {
+    // Generar confetti 
+    const showConfetti = () => {
         setTimeout(() => {
             confetti({
-            particleCount: 200,
-            spread: 80,
-            origin: { y: 0.5 }
+                particleCount: 200,
+                spread: 80,
+                origin: { y: 0.5 }
             });
         }, 600);
     };
 
-
     createCards();
 
-    // Reiniciar cartas
+
+
+    // Reiniciar cartas con button
     restartButton.addEventListener('click', () => {
         selectedCards = [];
         currentMove = 0;
         createCards();
-    })
+    });
 
 
     // Sonido de fondo
@@ -264,6 +267,7 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
             backgroundSound.play();
         });
     };
+
     listenAudio();
 
 
@@ -274,12 +278,10 @@ import CongratulationsMessage from "@/components/CongratulationsMessage.astro";
 
 
 
-    // BUTTONS
 
+    // BUTTONS
     // Botón de niveles
     selectButton.addEventListener('click', () => {
-    
-
         window.location.href = 'index.html';
     });
 
