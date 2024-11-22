@@ -1,47 +1,37 @@
-# Astro Starter Kit: Minimal
 
-```sh
-npm create astro@latest -- --template minimal
-```
+<h1 align="center">Memory Game</h1>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Un juego online de **memoria** para todo público.
+Fue realizado con la finalidad de aplicar conocimientos en **Desarrollor Web**, utilizando tecnologías como:
+- **HTML**
+- **CSS**
+- **JavaScrit**
+- **Astro**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Sumado a una biblioteca como **Confetti** y *Audios*, para agregar dinamísmo. 
+<br>
+<br>
 
-## 🚀 Project Structure
+## Tecnologías 📌
+<div display="inline">
+  <img src = "https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white"> 
+  <img src = "https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff">
+  <img src="https://img.shields.io/badge/-Astro-110A23?style=flat&logo=astro&logoColor=ffffff">
+</div>
 
-Inside of your Astro project, you'll see the following folders and files:
+---
+**Visitá la Web oficial: <a href="https://memory-game-prog.vercel.app/" target="_blank">Memory Game</a>**
+<br>
+<br>
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+**Te agradecería si quieres dar apoyo y marcar con una ⭐ el repositorio. Eres más que bienvenido a realizar cualquier tipo de cambio para que el proyecto crezca y mejore!**
+<br>
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### No dudes en contactarme
+- **LinkedIn:** 👉​<a href="https://www.linkedin.com/in/nicolasatapiedev30" target="_blank">LinkedIn</a>
+- **Instagram:** 👉​<a href="https://www.instagram.com/nicotapie1/" target="_blank">Instagram</a>
+<br>
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+<p align="center" style="font-size: 1.5em; font-weight: bold;"><b>Un fuerte abrazo ❤️</b></p>
