@@ -5,17 +5,23 @@
 <!-- HTML -->
 <div class="container__levels">
 
-    <article class="levels__items" id="card1" data-count="10">
-        <p class="levels__text">10 cartas</p>
-    </article>
+    <button class="levels__button">
+        <article class="levels__items" id="card1" data-count="10">
+            <p class="levels__text">10 cartas</p>
+        </article>
+    </button>
 
-    <article class="levels__items" id="card2" data-count="14">
-        <p class="levels__text">14 cartas</p>
-    </article>
+    <button class="levels__button">
+        <article class="levels__items" id="card2" data-count="14">
+            <p class="levels__text">14 cartas</p>
+        </article>
+    </button>
 
-    <article class="levels__items" id="card3" data-count="20">
-        <p class="levels__text">20 cartas</p>
-    </article>
+    <button class="levels__button">
+        <article class="levels__items" id="card3" data-count="20">
+            <p class="levels__text">20 cartas</p>
+        </article>
+    </button>
 
 </div>
 
@@ -23,6 +29,14 @@
 
 <!-- CSS -->
 <style>
+
+    .levels__button {
+        width: 25rem;
+        height: 25rem;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+    }
 
     .container__levels {
         display: flex;
@@ -46,7 +60,7 @@
         outline: none;
         border-radius: 10px;
         cursor: pointer;
-        transition: all 400ms ease;
+        transition: all 300ms ease;
         position: relative;
         filter: grayscale(30%) brightness(150%);
     }
@@ -65,7 +79,7 @@
         background: transparent;
         opacity: 0;
         border-radius: 6px;
-        transition: all 400ms ease;
+        transition: all 300ms ease;
     }
 
     .levels__items::before {
@@ -89,6 +103,18 @@
     }
 
     .levels__items:hover::after {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+
+    .levels__items:focus::before{
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+
+    .levels__items::after {
         width: 100%;
         height: 100%;
         opacity: 1;
